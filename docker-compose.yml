@@ -1,0 +1,93 @@
+version: "3.1"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_USER: elpatron
+      MYSQL_PASSWORD: qaORlCiR3B5dWdjfoJxwsPErQmCA
+      MYSQL_ROOT_PASSWORD: fevdkWF0bYq5OpipwAwy&vdVLyy
+      MYSQL_DATABASE: elpatron
+    volumes:
+      - ./usr/src/mysql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8183:80
+  # Redis
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis
+    restart: always
+    ports:
+      - "6380:6379"
+    links:
+      - redis-commander
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - 8082:8082
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "elpatron"
+      RABBITMQ_DEFAULT_PASS: "EKaXfG4RbMWrvrrX1Fd5rZ"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+
+    labels:
+      NAME: "rabbitmq"
+    volumes:
+      - ./usr/src/rabbitmq
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    volumes:
+      - ./usr/src/mongodb
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=adminelpatron
+      - MONGO_INITDB_DATABASE=auth
+      - MONGO_INITDB_ROOT_PASSWORD=Wd4CeFIIrRyM8vUJ7D2YXTKj
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=adminelpatron
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=Wd4CeFIIrRyM8vUJ7D2YXTKj
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_BASICAUTH_USERNAME=elpatronroot
+      - ME_CONFIG_BASICAUTH_PASSWORD=FkHPxX6lkF4OL9dtcLjhp
