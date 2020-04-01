@@ -1,0 +1,37 @@
+2ffb95f9c180        apicard_cards                           "docker-entrypoint.s…"   16 minutes ago      Up 16 minutes             0.0.0.0:3332->3332/tcp                                                                       cards
+c16643f96225        api_captcha_captcha                     "docker-entrypoint.s…"   18 minutes ago      Up 6 minutes              0.0.0.0:3331->3331/tcp                                                                       captcha
+ac9d2e69566a        mongo-express                           "tini -- /docker-ent…"   31 minutes ago      Up 31 minutes             0.0.0.0:8081->8081/tcp                                                                       services_mongo-express_1
+d027b7898cbb        phpmyadmin/phpmyadmin                   "/docker-entrypoint.…"   31 minutes ago      Up 31 minutes             0.0.0.0:8183->80/tcp                                                                         phpmyadmin
+3b1f8675eccd        redis                                   "docker-entrypoint.s…"   31 minutes ago      Up 31 minutes             0.0.0.0:6380->6379/tcp                                                                       redis
+cc285ebf4e5f        rediscommander/redis-commander:latest   "/usr/bin/dumb-init …"   31 minutes ago      Up 31 minutes (healthy)   8081/tcp, 0.0.0.0:8082->8082/tcp                                                             redis-commander
+ed2731e7f2b0        mysql:5.7                               "docker-entrypoint.s…"   31 minutes ago      Up 31 minutes             0.0.0.0:3306->3306/tcp, 33060/tcp                                                            mysql
+722cdc00d4ad        mongo                                   "docker-entrypoint.s…"   31 minutes ago      Up 31 minutes             0.0.0.0:27017->27017/tcp                                                                     mongo
+9425a2b9c0f8        rabbitmq:3-management                   "docker-entrypoint.s…"   31 minutes ago      Up 31 minutes             4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   services_rabbitmq_1
+66206b58a32e        newepatron_elpatron 
+
+
+NETWORK ID          NAME                  DRIVER              SCOPE
+21c67193a041        api_captcha_default   bridge              local
+e721cc13765a        apicard_default       bridge              local
+a6b8dbbd52d8        bridge                bridge              local
+83e4d2b71ada        host                  host                local
+a141513e24ac        newepatron_default    bridge              local
+3b232ad77d18        none                  null                local
+dd43f65754cb        services_default      bridge              local
+root@slave-node:~/newEpatron/app/Controllers/Http# 
+
+docker inspect 
+
+docker network
+
+6504867262783814|06|2023|000
+6504867262783815|06|2023|000
+6504867262783816|06|2023|000
+6504867262783817|06|2023|000
+6504867262783818|06|2023|000
+6504867262783819|06|2023|000
+6504867262783810|06|2023|000
+6504867262783811|06|2023|000
+6504867262783813|06|2023|000
+6504867262783824|06|2023|000
+6504867262783844|06|2023|000

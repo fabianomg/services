@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.5"
 services:
   mysql:
     image: mysql:5.7
@@ -13,6 +13,7 @@ services:
       - ./usr/src/mysql
     ports:
       - 3306:3306
+    
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -38,6 +39,7 @@ services:
       - "6380:6379"
     links:
       - redis-commander
+ 
 
   redis-commander:
     container_name: redis-commander
@@ -48,35 +50,20 @@ services:
       - REDIS_HOSTS=local:redis:6379
     ports:
       - 8082:8082
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    hostname: "rabbit"
-    environment:
-      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-      RABBITMQ_DEFAULT_USER: "elpatron"
-      RABBITMQ_DEFAULT_PASS: "EKaXfG4RbMWrvrrX1Fd5rZ"
-      RABBITMQ_DEFAULT_VHOST: "/"
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-    restart: always
-
-    labels:
-      NAME: "rabbitmq"
-    volumes:
-      - ./usr/src/rabbitmq
+  
   mongo:
     image: mongo
     container_name: mongo
     restart: always
     volumes:
-      - ./usr/src/mongodb
+      - ./usr/src/mongo
     ports:
       - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=adminelpatron
       - MONGO_INITDB_DATABASE=auth
       - MONGO_INITDB_ROOT_PASSWORD=Wd4CeFIIrRyM8vUJ7D2YXTKj
+    
 
   mongo-express:
     image: mongo-express
@@ -91,3 +78,6 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_BASICAUTH_USERNAME=elpatronroot
       - ME_CONFIG_BASICAUTH_PASSWORD=FkHPxX6lkF4OL9dtcLjhp
+
+ 
+ 

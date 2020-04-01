@@ -1,0 +1,2 @@
+dletear kunernets == kubectl drain slave-node --delete-local-data --force --ignore-daemonsets
+kubectl delete node slave-node
